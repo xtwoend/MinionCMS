@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": ">=5.4",
-        "slim/slim": "~2.0",
+        "slim/slim": "2.*",
         "dflydev/dot-access-data": "~1.0",
         "michelf/php-markdown": "~1.5",
         "symfony/yaml": "~2.0",

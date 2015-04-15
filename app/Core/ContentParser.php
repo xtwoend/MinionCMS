@@ -26,7 +26,11 @@ class ContentParser {
 		}
 		if ($content) {
 			try {
-				$data['content'] = MarkdownExtra::defaultTransform($content);
+				if(isset($data['info']['raw'])){
+					$data['content'] = $content;
+				}else{
+					$data['content'] = MarkdownExtra::defaultTransform($content);
+				}				
 			} catch(\Exception $e) {}
 		}
 		if (!isset($data['content'])) {

@@ -139,15 +139,16 @@ class Gear {
 				'base_url' => $this->config->get('app.base_url') . '/' . $this->config->get('blog.blog_folder')
 			];
 		}
-
-		$navigation = $this->filesToNav($files, $this->currentUrl());
-
+		
+		$segment = (count(explode('/', $this->segmentUrl())) > 1) ? ltrim($this->segmentUrl(), "/") : $this->segmentUrl();
+		$navigation = $this->filesToNav($files, $segment );
+		//print_r($navigation);
+		//exit;
 		$routes = $this->filesToRoutes($files);
 
 		foreach ($routes as $route) {
 
 			$thisroute = ($route['route'] == '/') ? $route['route'] : '/' . $route['route'];
-
 			$app->get($thisroute , function() use ($app, $route, $posts, $allPosts, $postsPagination){
 				
 				$data = $this->getFileData($route['path']);
@@ -204,7 +205,7 @@ class Gear {
 		}
 	}
 
-	protected function filesToRoutes($files, $route_prefix = '', $path_prefix = '')
+	protected function filesToRoutes($files, $route_prefix = '', $path_prefix = '', $child = false)
 	{
 		$result = [];
 		$blogBase = str_replace($this->config->get('app.content_path'), '', $this->blogPath);
@@ -214,15 +215,15 @@ class Gear {
 				if ($key != $blogBase) {
 					if (preg_match('/^\d+\-/', $key)) {
 						list($index, $path) = explode('-', $key, 2);
-						$result = array_merge($result, $this->filesToRoutes($value, $route_prefix . $path . '/', $path_prefix . $key . '/'));
+						$result = array_merge($result, $this->filesToRoutes($value, $route_prefix . $path . '/', $path_prefix . $key . '/', true));
 					} else {
-						$result = array_merge($result, $this->filesToRoutes($value, $route_prefix . $key . '/', $path_prefix . $key . '/'));
+						$result = array_merge($result, $this->filesToRoutes($value, $route_prefix . $key . '/', $path_prefix . $key . '/', true));
 					}
 				}
 			} else {
 				$route = str_replace($this->config->get('app.content_extension'), '', $value['nice']);
 				if ($route == 'index') {
-					$route = '/';
+					$route = ($child)? '' : '/';
 				}
 
 				$result[] = [
@@ -285,15 +286,17 @@ class Gear {
 		return $result;
 	}
 
-	protected function filesToNav($files, $currentUri, $route_prefix = '', $path_prefix = '')
+	protected function filesToNav($files, $currentUri, $route_prefix = '', $path_prefix = '', $child = false)
 	{
 		$result = [];
 		$blogBase = str_replace($this->config->get('app.content_path'), '', $this->blogPath);
-
+		$i = 0;
 		foreach ($files as $key => $value) {
 			if (!is_int($key)) {
 				if ($key == $blogBase) {
+					
 					$url = basename($blogBase);
+
 					if (preg_match('/^\d+\-/', $url)) {
 						list($index, $path) = explode('-', $url, 2);
 						$url = $path;
@@ -307,15 +310,15 @@ class Gear {
 				} else {
 					if (preg_match('/^\d+\-/', $key)) {
 						list($index, $path) = explode('-', $key, 2);
-						$result[$key] = $this->filesToNav($value, $currentUri, $route_prefix . $path . '/', $path_prefix . $key . '/');
+						$result[$key] = $this->filesToNav($value, $currentUri, $route_prefix . $path . '/', $path_prefix . $key . '/', true);
 					} else {
-						$result[$key] = $this->filesToNav($value, $currentUri, $route_prefix . $key . '/', $path_prefix . $key . '/');
+						$result[$key] = $this->filesToNav($value, $currentUri, $route_prefix . $key . '/', $path_prefix . $key . '/', true);
 					}
 				}
 			} elseif ($path_prefix != $blogBase . '/') {
 				$route = str_replace($this->config->get('app.content_extension'), '', $value['nice']);
 				if ($route == 'index') {
-					$route = '/';
+					$route = ($child)? '' : '/';
 				}
 				if (!$currentUri) {
 					$currentUri = '/';
@@ -411,11 +414,33 @@ class Gear {
         return $uri;
     }
 
-    public function currentUrl($withQueryString = false, $appName = 'default')
+    public function currentUrl($withQueryString = true, $appName = 'default')
     {
         $app = Slim::getInstance($appName);
         $req = $app->request();
         $uri = $req->getUrl() . $req->getPath();
+
+        if ($withQueryString) {
+            $env = $app->environment();
+
+            if ($env['QUERY_STRING']) {
+                $uri .= '?' . $env['QUERY_STRING'];
+            }
+        }
+
+        return $uri;
+    }
+
+    /**
+     * get segment url.
+     *
+     * @return
+     */
+    public function segmentUrl($withQueryString = true, $appName = 'default')
+    {
+    	$app = Slim::getInstance($appName);
+        $req = $app->request();
+        $uri = $req->getPath();
 
         if ($withQueryString) {
             $env = $app->environment();
@@ -439,5 +464,25 @@ class Gear {
 		}
 
 		return $data;
+	}
+
+	private function slugify($text)
+	{
+		// replace non letter or digits by -
+		$text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+		// trim
+		$text = trim($text, '-');
+		// transliterate
+		$text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+		// lowercase
+		$text = strtolower($text);
+		// remove unwanted characters
+		$text = preg_replace('~[^-\w]+~', '', $text);
+
+		if (empty($text)) {
+			return 'n-a';
+		}
+
+		return $text;
 	}
 }
