@@ -1,0 +1,30 @@
+{
+    "name": "xtwoend/minioncms",
+    "description": "The Minion CMS",
+    "keywords": ["cms", "flat"],
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/xtwoend/MinionCMS/issues",
+        "source": "https://github.com/xtwoend/MinionCMS"
+    },
+    "authors": [
+        {
+            "name": "Abdul Hafidz Anshari",
+            "email": "aditans88@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "slim/slim": "~2.0",
+        "dflydev/dot-access-data": "~1.0",
+        "michelf/php-markdown": "~1.5",
+        "symfony/yaml": "~2.0",
+        "slim/views": "0.1.*",
+        "twig/twig": "1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Minion\\": "app/"
+        }
+    }
+}
