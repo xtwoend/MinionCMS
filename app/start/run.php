@@ -2,11 +2,10 @@
 
 require __DIR__.'/autoload.php';
 require __DIR__.'/../Core/Gear.php';
+require __DIR__.'/../Core/helpers.php';
 
 $gear = new Minion\Core\Gear;
-
 $config = $gear->config();
-
 $app = $gear->init();
 
 /**

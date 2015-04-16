@@ -11,14 +11,14 @@ return array(
 	// The file extension to use for content files
 	'content_extension' => '.md',
 
-	'base_url'			=> 'localhost/me/',
+	'base_url'			=> null,
 
-	'log'			=> [
-						'enabled' 	=> true,
-						'writer'	=> null,
-						'level' 	=> \Slim\Log::DEBUG
-					],
-	'routes'		=> [
-						'case_sensitive' => true
-					]
+	'log'				=> [
+							'enabled' 	=> true,
+							'writer'	=> null,
+							'level' 	=> \Slim\Log::DEBUG
+						],
+	'routes'			=> [
+							'case_sensitive' => true
+						]
 );

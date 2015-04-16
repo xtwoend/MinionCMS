@@ -3,7 +3,7 @@
 
 return array(
 	
-	'lifetime'       => '20 minutes',
+	'lifetime'      => '20 minutes',
     
     'path'          => '/',
     
@@ -13,7 +13,7 @@ return array(
     
     'httponly'      => false,
     
-    'secret_key'        => 'CHANGE_ME',
+    'secret_key'    => 'CHANGE_ME',
     
     'cipher'        => MCRYPT_RIJNDAEL_256,
     

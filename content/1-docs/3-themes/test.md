@@ -4,4 +4,4 @@ keywords: minion, cms, lightweight
 template: docs.html
 ----
 
-download
+Themes

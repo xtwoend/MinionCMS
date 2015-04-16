@@ -103,7 +103,7 @@ class Gear {
 		$view = $app->view();
 		$view->parserOptions = $configView;
 		$view->parserExtensions = array(
-		    new \Slim\Views\TwigExtension(),
+		    new \Minion\Core\TwigExtension()
 		);
 		
 		$this->setRoutes($app);
@@ -310,6 +310,7 @@ class Gear {
 				} else {
 					if (preg_match('/^\d+\-/', $key)) {
 						list($index, $path) = explode('-', $key, 2);
+						$key = $path;
 						$result[$key] = $this->filesToNav($value, $currentUri, $route_prefix . $path . '/', $path_prefix . $key . '/', true);
 					} else {
 						$result[$key] = $this->filesToNav($value, $currentUri, $route_prefix . $key . '/', $path_prefix . $key . '/', true);
@@ -319,6 +320,7 @@ class Gear {
 				$route = str_replace($this->config->get('app.content_extension'), '', $value['nice']);
 				if ($route == 'index') {
 					$route = ($child)? '' : '/';
+					$route_prefix = rtrim($route_prefix, '/');
 				}
 				if (!$currentUri) {
 					$currentUri = '/';
@@ -345,6 +347,18 @@ class Gear {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * return all menu.
+	 *
+	 * @return
+	 */
+	public function navigation()
+	{	
+		$files = $this->readFiles($this->config->get('app.content_path'), $this->config->get('app.content_extension'));
+		$segment = (count(explode('/', $this->segmentUrl())) > 1) ? ltrim($this->segmentUrl(), "/") : $this->segmentUrl();
+		return $this->filesToNav($files, $segment);
 	}
 
 	protected function filesToPosts($files)
@@ -389,14 +403,15 @@ class Gear {
 			if (isset($data['info']['published'])) {
 				$published = date($this->config->get('blog.date_format'), strtotime($data['info']['published']));
 			}
-
+			$image = isset($data['info']['image']) ? $data['info']['image'] :  $this->base() . '/assets/image/no_image.jpg';
 			$result[] = [
 				'route'     => $routeBase . '/' . $route,
 				'path' 	    => $blogBase . '/' . $post['raw'],
 				'title'     => $title,
 				'info'      => isset($data['info']) ? $data['info'] : '',
 				'excerpt'   => $excerpt,
-				'published' => $published
+				'published' => $published,
+				'image'		=> $image
 			];
 		}
 

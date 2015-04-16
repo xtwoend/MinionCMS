@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<!-- Intro -->
+            <section class="site-section site-section-light site-section-top themed-background-dark">
+                <div class="container">
+                    <h1 class="animation-slideDown"><strong>Documentation</strong></h1>
+                </div>                
+            </section>
+            <!-- END Intro -->
+
+            <!-- Helpdesk -->
+            <section class="site-content site-section">
+                <div class="container">
+                    <div class="row">
+                         <div class="col-sm-3 col-md-3">
+                            {{ renderNav('docs')|raw }}   
+                         </div>
+                        <!-- Sidebar -->
+                        <div class="col-sm-9 col-md-9">
+                            <aside class="sidebar site-block">
+                                {{ content|raw }}
+                                <!-- END Latest Articles -->
+                            </aside>
+                        </div>
+                        <!-- END Sidebar -->
+                    </div>
+                </div>
+            </section>
+            <!-- END Helpdesk -->
+{% endblock %}

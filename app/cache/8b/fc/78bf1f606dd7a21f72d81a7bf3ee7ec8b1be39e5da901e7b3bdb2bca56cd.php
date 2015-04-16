@@ -52,7 +52,7 @@ class __TwigTemplate_8bfc78bf1f606dd7a21f72d81a7bf3ee7ec8b1be39e5da901e7b3bdb2bc
                     <div class=\"row\">
                         <!-- Posts -->
                         
-                        <div class=\"col-sm-8 col-md-9\">
+                        <div class=\"col-sm-12 col-md-12\">
                             ";
         // line 21
         $context['_parent'] = (array) $context;
@@ -64,8 +64,11 @@ class __TwigTemplate_8bfc78bf1f606dd7a21f72d81a7bf3ee7ec8b1be39e5da901e7b3bdb2bc
                                 <div class=\"row\">
                                     <div class=\"col-md-4\">
                                         <p>
-                                            <a href=\"blog_post.html\">
-                                                <img src=\"img/placeholders/photos/photo1.jpg\" alt=\"image\" class=\"img-responsive\">
+                                            <a href=\"\">
+                                                <img src=\"";
+            // line 28
+            echo twig_escape_filter($this->env, $this->getAttribute($context["post"], "image", array()), "html", null, true);
+            echo "\" alt=\"image\" class=\"img-responsive\">
                                             </a>
                                         </p>
                                     </div>
@@ -113,132 +116,74 @@ class __TwigTemplate_8bfc78bf1f606dd7a21f72d81a7bf3ee7ec8b1be39e5da901e7b3bdb2bc
         // line 51
         echo "
                             <!-- Pagination -->
-                            <div class=\"text-right\">
-                                <ul class=\"pagination\">
-                                    <li><a href=\"javascript:void(0)\"><i class=\"fa fa-angle-left\"></i></a></li>
-                                    <li class=\"active\"><a href=\"javascript:void(0)\">1</a></li>
-                                    <li><a href=\"javascript:void(0)\">2</a></li>
-                                    <li><a href=\"javascript:void(0)\">3</a></li>
-                                    <li><a href=\"javascript:void(0)\">4</a></li>
-                                    <li><a href=\"javascript:void(0)\"><i class=\"fa fa-angle-right\"></i></a></li>
-                                </ul>
-                            </div>
-                            <!-- END Pagination -->
+                           
+                            ";
+        // line 54
+        if (($this->getAttribute((isset($context["pagination"]) ? $context["pagination"] : null), "total_pages", array()) > 1)) {
+            // line 55
+            echo "                                <div class=\"text-right\">
+                                    <ul class=\"pagination\">
+                                        ";
+            // line 57
+            if (($this->getAttribute((isset($context["pagination"]) ? $context["pagination"] : null), "current_page", array()) > 1)) {
+                // line 58
+                echo "                                            <li><a href=\"";
+                echo twig_escape_filter($this->env, $this->getAttribute((isset($context["pagination"]) ? $context["pagination"] : null), "base_url", array()), "html", null, true);
+                echo "?page=";
+                echo twig_escape_filter($this->env, ($this->getAttribute((isset($context["pagination"]) ? $context["pagination"] : null), "current_page", array()) - 1), "html", null, true);
+                echo "\" class=\"prev\"><i class=\"fa fa-angle-left\"></i></a></li>
+                                        ";
+            }
+            // line 60
+            echo "                                        ";
+            $context['_parent'] = (array) $context;
+            $context['_seq'] = twig_ensure_traversable(range(1, $this->getAttribute((isset($context["pagination"]) ? $context["pagination"] : null), "total_pages", array())));
+            foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
+                // line 61
+                echo "                                            ";
+                if (($context["i"] == $this->getAttribute((isset($context["pagination"]) ? $context["pagination"] : null), "current_page", array()))) {
+                    // line 62
+                    echo "                                                <li class=\"active\"><a class=\"current-page\">";
+                    echo twig_escape_filter($this->env, $context["i"], "html", null, true);
+                    echo "</a></li>
+                                            ";
+                } else {
+                    // line 64
+                    echo "                                                <li><a href=\"";
+                    echo twig_escape_filter($this->env, $this->getAttribute((isset($context["pagination"]) ? $context["pagination"] : null), "base_url", array()), "html", null, true);
+                    echo "?page=";
+                    echo twig_escape_filter($this->env, $context["i"], "html", null, true);
+                    echo "\">";
+                    echo twig_escape_filter($this->env, $context["i"], "html", null, true);
+                    echo "</a></li>
+                                            ";
+                }
+                // line 66
+                echo "                                        ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['i'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 67
+            echo "                                        ";
+            if (($this->getAttribute((isset($context["pagination"]) ? $context["pagination"] : null), "current_page", array()) < $this->getAttribute((isset($context["pagination"]) ? $context["pagination"] : null), "total_pages", array()))) {
+                // line 68
+                echo "                                            <li><a href=\"";
+                echo twig_escape_filter($this->env, $this->getAttribute((isset($context["pagination"]) ? $context["pagination"] : null), "base_url", array()), "html", null, true);
+                echo "?page=";
+                echo twig_escape_filter($this->env, ($this->getAttribute((isset($context["pagination"]) ? $context["pagination"] : null), "current_page", array()) + 1), "html", null, true);
+                echo "\" class=\"next\"><i class=\"fa fa-angle-right\"></i></a></li>
+                                        ";
+            }
+            // line 70
+            echo "                                    </ul>
+                                </div>
+                            ";
+        }
+        // line 73
+        echo "                            <!-- END Pagination -->
                         </div>
                         <!-- END Posts -->
-
-                        <!-- Sidebar -->
-                        <div class=\"col-sm-4 col-md-3\">
-                            <aside class=\"sidebar site-block\">
-                                <!-- Search -->
-                                <div class=\"sidebar-block\">
-                                    <form action=\"blog.html\" method=\"post\" onsubmit=\"return false;\">
-                                        <div class=\"input-group\">
-                                            <input type=\"text\" id=\"search-term\" name=\"searh-term\" class=\"form-control\" placeholder=\"Search..\">
-                                            <div class=\"input-group-btn\">
-                                                <button type=\"submit\" class=\"btn btn-primary\"><i class=\"fa fa-search\"></i></button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- END Search -->
-
-                                <!-- Categories -->
-                                <div class=\"sidebar-block\">
-                                    <h4 class=\"site-heading\"><strong>News</strong> Categories</h4>
-                                    <ul class=\"fa-ul ul-breath\">
-                                        <li><i class=\"fa fa-angle-right fa-li\"></i> <a href=\"javascript:void(0)\">Updates</a></li>
-                                        <li><i class=\"fa fa-angle-right fa-li\"></i> <a href=\"javascript:void(0)\">Special Offers</a></li>
-                                        <li><i class=\"fa fa-angle-right fa-li\"></i> <a href=\"javascript:void(0)\">Products</a></li>
-                                        <li><i class=\"fa fa-angle-right fa-li\"></i> <a href=\"javascript:void(0)\">Features</a></li>
-                                        <li><i class=\"fa fa-angle-right fa-li\"></i> <a href=\"javascript:void(0)\">Articles</a></li>
-                                        <li><i class=\"fa fa-angle-right fa-li\"></i> <a href=\"javascript:void(0)\">Tutorials</a></li>
-                                        <li><i class=\"fa fa-angle-right fa-li\"></i> <a href=\"javascript:void(0)\">Guides</a></li>
-                                    </ul>
-                                </div>
-                                <!-- END Categories -->
-
-                                <!-- Popular and Recent -->
-                                <div class=\"sidebar-block\">
-                                    <h4 class=\"site-heading\"><strong>Best</strong> Articles</h4>
-                                    <ul class=\"nav nav-tabs push-bit\" data-toggle=\"tabs\">
-                                        <li class=\"active\"><a href=\"#posts-popular\"><i class=\"fa fa-trophy\"></i> Popular</a></li>
-                                        <li><a href=\"#posts-recent\"><i class=\"fa fa-clock-o\"></i> Recent</a></li>
-                                    </ul>
-                                    <div class=\"tab-content\">
-                                        <div class=\"tab-pane active\" id=\"posts-popular\">
-                                            <div class=\"content-float clearfix\">
-                                                <img src=\"img/placeholders/avatars/avatar12.jpg\" alt=\"Avatar\" class=\"img-circle pull-left\">
-                                                <h5><a href=\"javascript:void(0)\"><strong>How to be more productive</strong></a></h5>
-                                                <small class=\"text-muted\">1 year ago</small>
-                                            </div>
-                                            <div class=\"content-float clearfix\">
-                                                <img src=\"img/placeholders/avatars/avatar2.jpg\" alt=\"Avatar\" class=\"img-circle pull-left\">
-                                                <h5><a href=\"javascript:void(0)\"><strong>CSS3 &amp; HTML5 Tutorial</strong></a></h5>
-                                                <small class=\"text-muted\">6 days ago</small>
-                                            </div>
-                                            <div class=\"content-float clearfix\">
-                                                <img src=\"img/placeholders/avatars/avatar3.jpg\" alt=\"Avatar\" class=\"img-circle pull-left\">
-                                                <h5><a href=\"javascript:void(0)\"><strong>How to push your company forward</strong></a></h5>
-                                                <small class=\"text-muted\">15 days ago</small>
-                                            </div>
-                                            <div class=\"content-float clearfix\">
-                                                <img src=\"img/placeholders/avatars/avatar1.jpg\" alt=\"Avatar\" class=\"img-circle pull-left\">
-                                                <h5><a href=\"javascript:void(0)\"><strong>How to stop procrastination</strong></a></h5>
-                                                <small class=\"text-muted\">2 years ago</small>
-                                            </div>
-                                            <div class=\"content-float clearfix\">
-                                                <img src=\"img/placeholders/avatars/avatar11.jpg\" alt=\"Avatar\" class=\"img-circle pull-left\">
-                                                <h5><a href=\"javascript:void(0)\"><strong>New updates and more!</strong></a></h5>
-                                                <small class=\"text-muted\">1 month ago</small>
-                                            </div>
-                                            <div class=\"text-right\">
-                                                <a href=\"javascript:void(0)\" class=\"label label-primary\">Read More..</a>
-                                            </div>
-                                        </div>
-                                        <div class=\"tab-pane\" id=\"posts-recent\">
-                                            <div class=\"content-float clearfix\">
-                                                <img src=\"img/placeholders/avatars/avatar6.jpg\" alt=\"Avatar\" class=\"img-circle pull-left\">
-                                                <h5><a href=\"javascript:void(0)\"><strong>How to push your company forward</strong></a></h5>
-                                                <small class=\"text-muted\">1 day ago</small>
-                                            </div>
-                                            <div class=\"content-float clearfix\">
-                                                <img src=\"img/placeholders/avatars/avatar4.jpg\" alt=\"Avatar\" class=\"img-circle pull-left\">
-                                                <h5><a href=\"javascript:void(0)\"><strong>New updates and more!</strong></a></h5>
-                                                <small class=\"text-muted\">1 week ago</small>
-                                            </div>
-                                            <div class=\"content-float clearfix\">
-                                                <img src=\"img/placeholders/avatars/avatar16.jpg\" alt=\"Avatar\" class=\"img-circle pull-left\">
-                                                <h5><a href=\"javascript:void(0)\"><strong>How to be more productive</strong></a></h5>
-                                                <small class=\"text-muted\">2 weeks ago</small>
-                                            </div>
-                                            <div class=\"content-float clearfix\">
-                                                <img src=\"img/placeholders/avatars/avatar9.jpg\" alt=\"Avatar\" class=\"img-circle pull-left\">
-                                                <h5><a href=\"javascript:void(0)\"><strong>CSS3 &amp; HTML5 Tutorial</strong></a></h5>
-                                                <small class=\"text-muted\">1 month ago</small>
-                                            </div>
-                                            <div class=\"content-float clearfix\">
-                                                <img src=\"img/placeholders/avatars/avatar5.jpg\" alt=\"Avatar\" class=\"img-circle pull-left\">
-                                                <h5><a href=\"javascript:void(0)\"><strong>How to stop procrastination</strong></a></h5>
-                                                <small class=\"text-muted\">2 months ago</small>
-                                            </div>
-                                            <div class=\"text-right\">
-                                                <a href=\"javascript:void(0)\" class=\"label label-primary\">Read More..</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END Popular and Recent -->
-
-                                <!-- About -->
-                                <div class=\"sidebar-block\">
-                                    <h4 class=\"site-heading\"><strong>About</strong> Us</h4>
-                                    <p>Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices.</p>
-                                </div>
-                                <!-- END About -->
-                            </aside>
-                        </div>
-                        <!-- END Sidebar -->
                     </div>
                 </div>
             </section>
@@ -259,6 +204,6 @@ class __TwigTemplate_8bfc78bf1f606dd7a21f72d81a7bf3ee7ec8b1be39e5da901e7b3bdb2bc
 
     public function getDebugInfo()
     {
-        return array (  114 => 51,  101 => 44,  93 => 41,  87 => 37,  81 => 35,  79 => 34,  75 => 33,  62 => 22,  58 => 21,  39 => 4,  36 => 3,  11 => 1,);
+        return array (  184 => 73,  179 => 70,  171 => 68,  168 => 67,  162 => 66,  152 => 64,  146 => 62,  143 => 61,  138 => 60,  130 => 58,  128 => 57,  124 => 55,  122 => 54,  117 => 51,  104 => 44,  96 => 41,  90 => 37,  84 => 35,  82 => 34,  78 => 33,  70 => 28,  62 => 22,  58 => 21,  39 => 4,  36 => 3,  11 => 1,);
     }
 }

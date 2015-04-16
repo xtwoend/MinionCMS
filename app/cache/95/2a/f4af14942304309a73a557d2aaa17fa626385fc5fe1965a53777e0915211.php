@@ -130,7 +130,10 @@ class __TwigTemplate_952af4af14942304309a73a557d2aaa17fa626385fc5fe1965a53777e09
             <header>
                 <div class=\"container\">
                     <!-- Site Logo -->
-                    <a href=\"index.html\" class=\"site-logo\">
+                    <a href=\"";
+        // line 62
+        echo twig_escape_filter($this->env, $this->env->getExtension('slim')->site("/"), "html", null, true);
+        echo "\" class=\"site-logo\">
                         <i class=\"gi gi-flash\"></i> <strong>Minion</strong>CMS
                     </a>
                     <!-- Site Logo -->
@@ -215,9 +218,9 @@ class __TwigTemplate_952af4af14942304309a73a557d2aaa17fa626385fc5fe1965a53777e09
                             </ul>
                         </div>
                         <div class=\"col-sm-6 col-md-3\">
-                            <h4 class=\"footer-heading\"><span id=\"year-copy\">2014</span> &copy; <a href=\"http://goo.gl/TDOSuC\">ProUI Frontend</a></h4>
+                            <h4 class=\"footer-heading\"><span id=\"year-copy\">2015</span> &copy; <a href=\"https://github.com/xtwoend/MinionCMS\">MinionCMS</a></h4>
                             <ul class=\"footer-nav list-inline\">
-                                <li>Crafted with <i class=\"fa fa-heart text-danger\"></i> by <a href=\"http://goo.gl/vNS3I\">pixelcave</a></li>
+                                <li>Crafted with <i class=\"fa fa-heart text-danger\"></i> by <a href=\"fb.com/doel.Dxt\">abdul hafidz</a></li>
                             </ul>
                         </div>
                     </div>
@@ -289,6 +292,6 @@ class __TwigTemplate_952af4af14942304309a73a557d2aaa17fa626385fc5fe1965a53777e09
 
     public function getDebugInfo()
     {
-        return array (  276 => 105,  271 => 11,  265 => 9,  262 => 8,  259 => 7,  252 => 161,  248 => 160,  244 => 159,  238 => 156,  186 => 106,  184 => 105,  169 => 93,  160 => 87,  121 => 51,  114 => 47,  108 => 44,  102 => 41,  96 => 38,  88 => 33,  84 => 32,  80 => 31,  76 => 30,  72 => 29,  68 => 28,  64 => 27,  60 => 26,  51 => 19,  45 => 17,  42 => 16,  36 => 14,  34 => 13,  31 => 12,  29 => 7,  21 => 1,);
+        return array (  279 => 105,  274 => 11,  268 => 9,  265 => 8,  262 => 7,  255 => 161,  251 => 160,  247 => 159,  241 => 156,  189 => 106,  187 => 105,  172 => 93,  163 => 87,  135 => 62,  121 => 51,  114 => 47,  108 => 44,  102 => 41,  96 => 38,  88 => 33,  84 => 32,  80 => 31,  76 => 30,  72 => 29,  68 => 28,  64 => 27,  60 => 26,  51 => 19,  45 => 17,  42 => 16,  36 => 14,  34 => 13,  31 => 12,  29 => 7,  21 => 1,);
     }
 }
