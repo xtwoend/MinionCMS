@@ -1,0 +1,10 @@
+<?php
+
+return [
+    'admin' => [
+        'name'  => '$STUDLY_NAME$',
+        'icon'  => 'icon icon-social-dropbox',
+        'url'   => '#',
+        'child' => []
+    ]
+];

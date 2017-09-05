@@ -1,0 +1,17 @@
+{
+    "name": "$STUDLY_NAME$",
+    "alias": "$LOWER_NAME$",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "type": "plugin",
+    "providers": [
+        "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\$STUDLY_NAME$ServiceProvider",
+        "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\RouteServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}

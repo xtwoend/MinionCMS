@@ -1,0 +1,16 @@
+{	
+	"name": "admin",
+	"description": "default theme admin MinionCMS",
+	"version": "1.0",
+	"parent": "",
+	"type": "admin",
+	"author": [
+		{
+			"name": "Abdul Hafidz Anshari",
+			"email": "aditans88@gmail.com"
+		}
+	],
+	"files": [
+		"theme.php"
+	]
+}

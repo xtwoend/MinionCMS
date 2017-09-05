@@ -1,0 +1,15 @@
+{	
+	"name": "{{NAME}}",
+	"description": "",
+	"version": "1.0",
+	"parent": "",
+	"author": [
+		{
+			"name": "",
+			"email": ""
+		}
+	],
+	"files": [
+		"theme.php"
+	]
+}
